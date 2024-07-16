@@ -47,7 +47,7 @@ const Sidebar = ({ isOpen, toggleSidebar, sidebarFields }) => {
     >
       <div className="p-4 flex items-center justify-evenly">
         <Link to="/hr/statistics" className="flex items-center justify-center">
-          <img src="/logo.jpeg" />
+          <img src="/logo1.jpeg" />
         </Link>
         <button
           className="block lg:hidden absolute right-4 top-4"
