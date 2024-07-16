@@ -17,30 +17,30 @@ export const Analytics = () => {
         
     },
     {
-        RequestDate:"2023-02-03",
-        RequestTitle:"Nashyo",
-        RequestedBy:'Ira',
-        productName:"FUEL",
+        RequestDate:"2024-06-03",
+        RequestTitle:"Ira Verite",
+        RequestedBy:'Prince',
+        productName:"AMATA",
         SupportingDocument:"N/A",
         price:8769,
         status:"approved"
         
     },
     {
-        RequestDate:"2023-02-03",
-        RequestTitle:"Nashyo",
-        RequestedBy:'Ira',
-        productName:"FUEL",
+        RequestDate:"2024-06-03",
+        RequestTitle:"Ira Verite",
+        RequestedBy:'Prince',
+        productName:"AMATA",
         SupportingDocument:"N/A",
         price:8769,
         status:"approved"
         
     },
     {
-        RequestDate:"2023-02-03",
-        RequestTitle:"Nashyo",
-        RequestedBy:'Ira',
-        productName:"FUEL",
+        RequestDate:"2024-06-03",
+        RequestTitle:"Ira Verite",
+        RequestedBy:'Prince',
+        productName:"AMATA",
         SupportingDocument:"N/A",
         price:8769,
         status:"approved"

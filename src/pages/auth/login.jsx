@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { Formik, Form, ErrorMessage, Field } from 'formik'
+import React, { useState, useEffect } from 'react';
+import { Formik, Form, ErrorMessage, Field } from 'formik';
 import * as Yup from 'yup';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const logos = [
   "/public/logo1.jpeg",
@@ -10,6 +12,8 @@ const logos = [
 
 export const Login = () => {
   const [currentLogoIndex, setCurrentLogoIndex] = useState(0);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -20,13 +24,27 @@ export const Login = () => {
   }, []);
 
   const validationSchema = Yup.object().shape({
-    email: Yup.string()
-      .email('Invalid email format')
-      .required('Email is required'),
+    username: Yup.string()
+      .required('username is required'),
     password: Yup.string()
-      .min(6, 'Password must be at least 8 characters')
+      .min(1, 'Password must be at least 6 characters')
       .required('Password is required'),
   });
+
+  const handleSubmit = (values) => {
+    axios.post('http://localhost/project/Requestform/login.php', values)
+      .then(response => {
+        if (response.data.status === 'success') {
+          navigate('/admin/');
+        } else {
+          setError(response.data.message);
+        }
+      })
+      .catch(error => {
+        console.error('There was an error!', error);
+        setError('An unexpected error occurred. Please try again later.');
+      });
+  };
 
   return (
     <div className='flex flex-row bg-[#ECEDF2] w-full h-screen items-center'>
@@ -45,21 +63,21 @@ export const Login = () => {
         </div>
 
         <Formik
-          initialValues={{username:'',password:''}}
+          initialValues={{ username: '', password: '' }}
           validationSchema={validationSchema}
-          onSubmit={()=>{alert("hello")}}
+          onSubmit={handleSubmit}
         >
           <Form className="flex flex-col items-center w-[85%] md:w-[80%] lg:w-[70%] h-max gap-4 justify-center">
             <div className='flex flex-col w-full gap-2'>
-              <label htmlFor="email">Username</label>
+              <label htmlFor="username">Username</label>
               <Field
-                name="email"
-                type="email"
+                name="username"
+                type="text"
                 placeholder="Username"
-                className="w-full text-sm border border-[8F8F8F] px-2 py-3"
+                className="w-full text-sm border border-[#8F8F8F] px-2 py-3"
               />
               <ErrorMessage
-                name="email"
+                name="username"
                 component="div"
                 className="text-red-500 text-xs"
               />
@@ -70,7 +88,7 @@ export const Login = () => {
                 name="password"
                 type="password"
                 placeholder="Password"
-                className="w-full text-sm border border-[8F8F8F] px-2 py-3"
+                className="w-full text-sm border border-[#8F8F8F] px-2 py-3"
               />
               <ErrorMessage
                 name="password"
@@ -78,6 +96,9 @@ export const Login = () => {
                 className="text-red-500 text-xs"
               />
             </div>
+            {error && (
+              <div className="text-red-500 text-xs">{error}</div>
+            )}
             <div className='flex flex-col w-full'>
               <button
                 type="submit"
@@ -95,5 +116,5 @@ export const Login = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
